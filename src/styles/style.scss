@@ -1,0 +1,186 @@
+body {
+    background-color: #000;
+}
+
+.todo {
+    color:antiquewhite;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background-color: rgba(235, 79, 12, 0.416);
+}
+
+.todo__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo__info {
+    font-size: 30px;
+}
+
+.todo__buttons {
+}
+.todo__make-done {
+}
+.todo__delete {
+}
+.todo__select-all {
+    background: rgb(7, 151, 223);
+}
+.todo__remove-select {
+    background: rgb(157, 13, 223);
+}
+.todo__button {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: .6em;
+    color:rgb(247, 247, 247);
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s;
+
+    &:disabled {
+        cursor: default;
+        filter: brightness(0.5)
+    }
+
+    &:hover:not([disabled]) {
+        transform: scale(0.95);
+        color: black
+    }
+}
+
+
+.todo__main {
+    margin-top: 40px;
+}
+.todo__task {
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 20px;
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.todo__checkbox {
+    width: 18px;
+    height: 18px;
+    border: 3px solid white;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    &::after, &::before {
+        transition: all 0.3s;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 0px;
+        background-color: #fff;
+        transform: rotateZ(-60deg) translate(-5px, 7px);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 0px;
+        background-color: #fff;
+        transform: rotateZ(45deg) translate(8px, 9px);
+    }
+
+
+
+    &.checked {
+        &::after {
+            width: 18px;
+        }
+    
+        &::before {
+            width: 10px;
+        }
+    }
+    
+}
+.todo__deadline {
+    font-family: 'Courier New', Courier, monospace;
+    align-self: flex-end;
+}
+.todo__subject {
+    flex-grow: 1;
+}
+.todo__controls {
+    height: 100%;
+}
+.todo__done {
+    height: 2.2em;
+    background-color: rgb(19, 171, 30);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: .4em;
+    font-weight: bold;
+    transition: all 0.1s;
+
+    &:hover {
+        color: white
+    }
+}
+.todo__remove {
+    height: 2.2em;
+    background-color: rgb(255, 0, 0);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: .4em;
+    font-weight: bold;
+    transition: all 0.1s;
+
+    &:hover {
+        color: white
+    }
+}
+
+
+
+
+.todo__add-form {
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    gap: 15px;
+}
+.todo__add-date {
+    font-size: 1em;
+}
+.todo__add-subj {
+    flex-grow: 1;
+    padding: 0;
+    font-size: 1em;
+    padding: .3em;
+}
+.todo__add-submit {
+    cursor: pointer;
+    background-color: rgb(21, 192, 152);
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s;
+    &:hover {
+        color:#fff
+    }
+}
