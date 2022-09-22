@@ -3,6 +3,8 @@ class Task {
 
         this.deadline = deadline;
         this.subject = subject;
+        this.checked = false;
+        this.done = false;
         this.template = `
         <div class="todo__checkbox"></div>
         <div class="todo__deadline">${this.deadline}</div>
@@ -19,6 +21,18 @@ class Task {
         div.classList.add('todo__task');
         div.innerHTML= this.template;
         return div
+    }
+
+    checkHtmlTask() {
+        this.checked = true;
+    }
+    
+    uncheckHtmlTask() {
+        this.checked = false;
+    }
+
+    makeDone() {
+        this.done = true;
     }
 }
 

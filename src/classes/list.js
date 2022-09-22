@@ -36,22 +36,98 @@ class List {
 
     createNewTask(deadline, subject) {
         this.pushNewTask({deadline, subject});
-        this.appendNewTask(this.tasks[this.tasks.length - 1]);
+        this.appendNewTask(this.tasks[this.tasks.length - 1]['htmlElement']);
     }
 
     pushNewTask({deadline, subject}) {
         let newTask = new Task(deadline, subject)
-        this.tasks.push(newTask);
+        this.tasks.push({task: newTask, htmlElement: newTask.returnElement()});
     }
 
-   
+    checkHtmlElement(target) {
+        let taskObject = this.tasks.find((object) => {
+            if (object.htmlElement.querySelector('.todo__checkbox') === target) {
+                return object
+            }
+        });
+        if (taskObject.task.checked) {
+            taskObject.task.uncheckHtmlTask();
+        } else {
+            taskObject.task.checkHtmlTask();
+        }
+    }
 
-    appendNewTask(task) {
-        document.querySelector(this.taskParentSelector).append(task.returnElement())
+    taskIsDone(target) {
+        let taskObject = this.tasks.find((object) => {
+            if (object.htmlElement.querySelector('.todo__done') === target) {
+                return object
+            }
+        });
+        taskObject.task.makeDone();
+    }
+
+    appendNewTask(elem) {
+        document.querySelector(this.taskParentSelector).append(elem)
     }
 
     refreshLengthIndicator() {
         document.querySelector(this.lengthIndicatorSelector).innerHTML = this.tasks.length
+    }
+
+    deleteTask(target) {
+        let taskObject = this.tasks.find((object) => {
+            if (object.htmlElement.querySelector('.todo__remove') === target) {
+                return object
+            }
+        });
+        this.tasks = this.tasks.filter((object) => {
+            if (object.htmlElement !== taskObject.htmlElement) {
+                return true
+            }
+        })
+    }
+
+    selectAll() {
+        this.tasks.forEach(taskObject => {
+            taskObject.task.checkHtmlTask();
+        })
+    }
+
+    removeSelections() {
+        this.tasks.forEach(taskObject => {
+            taskObject.task.uncheckHtmlTask();
+        })
+    }
+
+    unblockAdditiveButtons() {
+        let anyCheckboxes = this.tasks.some(object => {
+            return object.task.checked === true
+        })
+        if (anyCheckboxes) {
+            document.querySelector('.todo__make-done').removeAttribute('disabled');
+            document.querySelector('.todo__delete').removeAttribute('disabled');
+        }
+        else {
+            document.querySelector('.todo__make-done').setAttribute('disabled', '');
+            document.querySelector('.todo__delete').setAttribute('disabled', '');
+        }
+
+    }
+
+    makeSelectedDone() {
+        this.tasks.forEach(taskObject => {
+            if (taskObject.task.checked) {
+                taskObject.task.makeDone();
+            }
+        })
+    }
+
+    deleteSelected() {
+        this.tasks = this.tasks.filter((object) => {
+            if (object.task.checked === false) {
+                return true
+            }
+        })
     }
 }
 
